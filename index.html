@@ -1,0 +1,88 @@
+<!--
+ionicinit.min.js 的功能與說明：
+push(name, title)：切換到目標頁，並回傳 Promise；約 100ms 後才 resolve，所以你可安全接 .then(...) 做「切頁後渲染」。
+presentAlert(header=null, message=null, buttons=null)：快速顯示 Ionic Alert；流程是建立元件 → 設定內容/按鈕 → 顯示 → 移除，避免殘留 DOM。
+presentActionSheet(header=null, subHeader=null, buttons=null)：給使用者一組操作選單（例如編輯/刪除/取消）；同樣會在關閉後清理元件。
+presentToast(message=null, duration=1800, position='bottom', color=null)：短暫提示訊息（成功、錯誤、已儲存等），支援時間、位置、顏色與按鈕。
+window.load 初始化段：動態載入 Ionic CDN 資源、建立 ion-app/ion-router/ion-nav、自動把所有 page-* 註冊成 route，最後呼叫 setUpIonic 完成啟動。
+
+ionicinit.min.js 的使用方式：
+1. 在 HTML 中使用 page-* 標籤定義頁面結構。
+2. 在 JavaScript 中使用 push('page-xxx') 切換頁面。
+3. 使用 presentAlert(...)、presentActionSheet(...)、presentToast(...) 顯示提示框。
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="App Title" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>App Title</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="shortcut icon apple-touch-icon" href="appicon.png" />
+    <script src="ionicinit.min.js"></script>
+    <style>
+      :root {
+        --ion-color-primary: red;
+      }
+    </style>
+  </head>
+
+  <body>
+
+
+
+    <page-home>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Empty Project</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        Hello World
+        <ion-button shape="round" size="full" onclick="push('page-second');">Go to Page 2</ion-button>
+      </ion-content>
+    </page-home>
+
+
+
+    <page-second>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+          </ion-buttons>
+          <ion-title>Page 2</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        This is Page 2.
+        <ion-button shape="round" size="full" onclick="push('page-third','Page 3');">Go to Page 3</ion-button>
+      </ion-content>
+    </page-second>
+
+
+
+    <page-third>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+          </ion-buttons>
+          <ion-title></ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        This is Page 3.
+      </ion-content>
+    </page-third>
+
+
+  </body>
+</html>

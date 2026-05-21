@@ -1,0 +1,17 @@
+{
+  "name": "BMI Tracker App",
+  "short_name": "BMI Tracker",
+  "theme_color": "#FF2600",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": ".",
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "appicon.png",
+      "type": "image/png",
+      "sizes": "500x500"
+    }
+  ]
+}
